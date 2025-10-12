@@ -18,7 +18,7 @@
       --footer-height: 55px; /* Tentukan tinggi footer */
     }
 
-    /* 1. KUNCI UNTUK MENGHILANGKAN SCROLLBAR DARI BROWSER UTAMA */
+    /* === 1. KUNCI: MENGHILANGKAN SCROLLBAR UTAMA DAN FOOTER FIXED === */
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
@@ -29,9 +29,10 @@
       display: flex; 
       flex-direction: column; 
       overflow-x: hidden;
-      /* MENGHILANGKAN SCROLLBAR: */
-      overflow-y: hidden; /* Mencegah scroll vertikal di body */
-      /* Memberikan padding bawah agar konten tidak tertutup footer fixed */
+      
+      /* MENGHILANGKAN SCROLLBAR BROWSER UTAMA */
+      overflow-y: hidden; 
+      /* MEMBERI RUANG UNTUK FOOTER FIXED */
       padding-bottom: var(--footer-height); 
     }
     
@@ -47,8 +48,8 @@
       justify-content: center;
       align-items: flex-start;
       width: 100%;
-      /* Sesuaikan tinggi main agar tidak melebihi viewport yang tersisa */
-      height: calc(100vh - var(--footer-height));
+      /* TINGGI SISA VIEWPORT */
+      height: calc(100vh - var(--footer-height)); 
       padding-top: 0px; 
       padding-bottom: 0px;
     }
@@ -60,23 +61,33 @@
       border-radius: 18px;
       background: transparent;
       box-shadow: var(--shadow-lg); /* MENGHILANGKAN BINGKAI LUAR KEDUA */
-      /* Memungkinkan konten di dalam iframe-container (yaitu iframe) untuk di-scroll jika diperlukan */
-      overflow-y: auto; 
+      /* PASTIKAN CONTAINER TIDAK SCROLL */
+      overflow-y: hidden; 
       position: relative; 
       transition: all 0.3s ease; 
       margin: 0; 
-    }
-
-    /* KUNCI: Membuat iframe-container menggunakan tinggi sisa viewport */
-    .iframe-container, #iframe-container {
-        height: 100%; 
-        border-radius: 0; /* Menghilangkan border radius jika Anda ingin tampilan penuh */
+      height: 100%; /* Mengisi tinggi main */
+      border-radius: 0;
     }
 
     /* Loading Overlay (Tingginya mengikuti iframe-container) */
     .loading-overlay {
-      /* ... CSS lainnya ... */
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
       border-radius: 0; 
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      font-weight: 600;
+      color: var(--primary-color);
     }
 
     /* Iframe styling */
@@ -89,11 +100,10 @@
       background: transparent;
       opacity: 0; 
       transition: opacity 0.5s ease;
-      /* KUNCI: Menyembunyikan scrollbar di iframe itu sendiri */
+      /* PASTIKAN SCROLLBAR DI DALAM IFRAME JUGA HILANG */
       overflow-y: hidden; 
     }
     
-    /* Scrollbar Iframe (untuk Webkit) */
     iframe::-webkit-scrollbar {
         display: none;
     }
@@ -108,9 +118,9 @@
       pointer-events: none;
     }
 
-    /* 2. KUNCI: FOOTER FIXED (Agar tidak terpengaruh oleh overflow: hidden) */
+    /* FOOTER FIXED */
     footer {
-      position: fixed; /* Menempel di viewport */
+      position: fixed; 
       bottom: 0;
       left: 0;
       text-align: center;
@@ -120,7 +130,7 @@
       border-top: 1px solid #e5e7eb;
       background: #ffffff;
       width: 100%; 
-      height: var(--footer-height); /* Tinggi tetap */
+      height: var(--footer-height); 
       z-index: 100;
     }
 
@@ -138,17 +148,20 @@
 
     /* Responsif */
     @media (max-width: 768px) {
-      /* Mengurangi tinggi footer di mobile */
       :root {
         --footer-height: 45px; 
       }
-      /* Iframe harus memiliki tinggi penuh di mobile */
+      body {
+        padding-bottom: var(--footer-height);
+      }
       main {
         height: calc(100vh - var(--footer-height));
       }
       .iframe-container {
+        max-width: 100%;
         width: 100%;
         margin: 0;
+        border-radius: 0;
       }
       iframe {
         height: 100%; 
@@ -170,7 +183,7 @@
       
       <iframe
         id="attendance-iframe"
-        src="https://script.google.com/macros/s/AKfycbwOw0IiThX1LnkBjELW3Cxll9J-7CVKncVXLRnpKpcR85PcIlOUjxBfsKjkZALWd1pzJQ/exec"
+        src="https://script.google.com/macros/s/AKfycbyzTbojRMSxuV1QHCY6r42PISpNwONhGBaDMwZUfrbYXd8ibEjHtHZWWCXkW6zErNkXJg/exec"
         title="Form Kehadiran"
         allow="camera; microphone"
         loading="lazy"
@@ -197,4 +210,3 @@
   </script>
 </body>
 </html>
-
