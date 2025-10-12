@@ -22,15 +22,16 @@
         .form-card:hover {
             transform: translateY(-5px); /* Efek sedikit naik saat di-hover */
         }
+        /* Hapus properti tinggi dari iframe di sini, kita pindahkan ke style inline */
         iframe {
             width: 100%;
-            height: 600px; /* Tinggi awal yang wajar */
+            /* Tinggi diatur di style inline iframe di bawah */
             border: none;
             display: block; 
-            transition: height 0.3s ease; /* Transisi tinggi yang halus */
         }
+        /* Hapus min-height jika iframe-wrapper tidak lagi diperlukan */
         .iframe-wrapper {
-            min-height: 500px; /* Tinggi minimum yang menjaga tampilan */
+             /* min-height tidak lagi diperlukan saat menggunakan tinggi statis */
         }
     </style>
 </head>
@@ -45,13 +46,15 @@
                 </div>
                 
                 <div class="card form-card">
-                    <div class="card-body p-0 iframe-wrapper">
+                    <div class="card-body p-0">
                         <iframe
                             id="appsScriptIframe"
-                            src="https://script.google.com/macros/s/AKfycbwNWgtfMWdYkrfM5pjYAHdjwgeM1WGglt-EVsNyk02caq4Zp0yUG9AXnKjmw98q0VoKnw/exec"
+                            src="https://script.google.com/macros/s/AKfycbzSRYkP3dVpBPUklAX40OLfmj07PNFq_N3DpY3GqGXC3bA9mdc8zu7DXuhWx4bSAkBr2A/exec"
                             scrolling="no" 
                             title="Embedded Google Apps Script Form"
                             allowfullscreen
+                            /* ✅ PENTING: TINGGI STATIS UNTUK MENGHILANGKAN SCROLLBAR */
+                            style="height: 750px; width: 100%; border: none;"
                         >
                         </iframe>
                     </div>
@@ -64,27 +67,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const iframe = document.getElementById('appsScriptIframe');
-            
-            iframe.onload = function() {
-                try {
-                    // Mencoba mendapatkan tinggi konten di dalam iframe
-                    const contentHeight = iframe.contentWindow.document.body.scrollHeight;
-                    // Atur tinggi iframe ke tinggi konten + 30px padding
-                    iframe.style.height = (contentHeight + 30) + 'px'; 
-                    console.log('Tinggi iframe disesuaikan secara otomatis: ' + iframe.style.height);
-                } catch (e) {
-                    // Fallback jika ada pembatasan keamanan
-                    console.warn("Gagal mengatur tinggi otomatis. Menggunakan tinggi statis 750px.");
-                    iframe.style.height = '750px'; 
-                }
-            };
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
