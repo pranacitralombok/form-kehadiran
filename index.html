@@ -1,186 +1,97 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistem Pencatatan Kehadiran | Muhammad Septi Rosidi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Kehadiran</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FONT & BOOTSTRAP LITE -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
-    /* CSS Variables */
+    /* === WARNA & DASAR === */
     :root {
       --primary-color: #2563eb;
-      --secondary-color: #64748b;
-      --bg-light: #f4f7fa;
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --text-muted: #6b7280;
     }
 
-    /* 1. Perbaikan untuk Sticky Footer */
     body {
       font-family: 'Poppins', sans-serif;
-      min-height: 100vh; /* WAJIB: Agar Flexbox mengisi seluruh viewport */
       margin: 0;
-      padding: 0;
+      background: linear-gradient(180deg, #f9fafb 0%, #eef2f6 100%);
       color: #1f2937;
-      display: flex; /* WAJIB: Mengubah body menjadi Flex Container */
-      flex-direction: column; /* WAJIB: Tata letak vertikal */
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* Wrapper utama - Main Content */
-    main {
-      flex: 1; /* WAJIB: Memungkinkan main mengambil semua ruang yang tersisa, mendorong footer ke bawah */
+    /* === IFRAME WRAPPER === */
+    .iframe-wrapper {
       display: flex;
       justify-content: center;
       align-items: flex-start;
       width: 100%;
-      padding-top: 20px;
-      padding-bottom: 20px;
+      padding: 0;
     }
 
-    /* Container iframe */
     .iframe-container {
-      width: 95%;
-      max-width: 850px;
-      border-radius: 18px;
-      background: #ffffff;
-      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 860px;
+      background: transparent;
+      border: none;
       overflow: hidden;
-      position: relative;
-      transition: all 0.3s ease;
     }
 
-    /* Loading Overlay */
-    .loading-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-      border-radius: 18px;
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-
-    /* Iframe styling */
     iframe {
-      display: block;
       width: 100%;
-      /* 2. Mengubah tinggi agar lebih realistis. Konten di dalamnya yang akan di-scroll. */
-      height: 95vh; 
-      min-height: 700px;
+      height: 100vh;
       border: none;
       background: transparent;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      /* Hapus scrolling="no" dari tag dan CSS */
+      display: block;
+      scrollbar-width: none;
     }
 
-    /* Status Iframe Loaded */
-    .iframe-loaded iframe {
-      opacity: 1;
+    iframe::-webkit-scrollbar {
+      display: none;
     }
 
-    .iframe-loaded .loading-overlay {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none; /* Penting untuk interaksi */
-    }
-
-    /* Footer */
+    /* === FOOTER === */
     footer {
       text-align: center;
-      padding: 15px 0;
-      color: #6b7280;
+      padding: 12px 0;
       font-size: 0.9rem;
-      border-top: 1px solid #e5e7eb;
-      background: #ffffff;
-      margin-top: 0; /* Pastikan tidak ada margin yang berlebihan */
+      color: var(--text-muted);
+      background: transparent;
     }
 
-    footer a {
+    footer strong {
       color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s ease;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-      color: #1e40af;
-    }
-
-    /* Responsif */
+    /* === RESPONSIVE === */
     @media (max-width: 768px) {
-      main {
-        padding-top: 15px;
-        padding-bottom: 15px;
-      }
-      .iframe-container {
-        width: 100%;
-        margin: 0 10px;
-        box-shadow: none;
-      }
-      iframe {
-        height: 90vh; 
-        min-height: 500px;
-      }
+      iframe { height: 95vh; }
     }
   </style>
 </head>
 
 <body>
-  <main class="iframe-wrapper">
-    <div id="iframe-container" class="iframe-container">
-      <div class="loading-overlay">
-        <div class="spinner-border text-primary me-2" role="status">
-          <span class="visually-hidden">Memuat...</span>
-        </div>
-        Memuat Form Kehadiran...
-      </div>
-      
-      <iframe
-        id="attendance-iframe"
-        src="https://script.google.com/macros/s/AKfycbx3EaGG7C--4-dsszDRqRKKGd9UIdGx06jE2tQ6ZuwA_PlXsPIVl3Y_ylMjgzkvjNc6ew/exec"
+  <div class="iframe-wrapper">
+    <div class="iframe-container">
+      <iframe 
+        src="https://script.google.com/macros/s/AKfycbwsEAgXVKGoIi7lDpvkuTR-A8Omj6wU2Aor0i676RX8vFViXbFwIUd3YoXFarmy4RR86g/exec"
         title="Form Kehadiran"
         allow="camera; microphone"
+        scrolling="no"
         loading="lazy"
-        allowtransparency="true"
-        frameborder="0">
+        allowtransparency="true">
       </iframe>
     </div>
-  </main>
+  </div>
 
   <footer>
-    © 2025 Created by&nbsp;
-    <a href="https://wa.me/6285133371984" target="_blank" rel="noopener noreferrer">
-      Muhammad Septi Rosidi
-    </a>
+    © 2025 Created by <strong>Muhammad Septi Rosidi</strong>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
-    document.getElementById('attendance-iframe').onload = function() {
-      // Penundaan sebentar untuk estetika
-      setTimeout(function() {
-        document.getElementById('iframe-container').classList.add('iframe-loaded');
-      }, 500); 
-    };
-  </script>
 </body>
 </html>
-
-
-
