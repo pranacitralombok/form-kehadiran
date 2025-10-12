@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Absensi MBG</title>
   <style>
     body {
       font-family: "Segoe UI", Arial, sans-serif;
@@ -11,48 +12,86 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* pastikan tidak muncul scroll di body */
     }
 
-    .iframe-container {
-      position: relative;
-      width: 95%;
-      max-width: 800px;
-      margin: 0 auto;
-      padding-bottom: 140%;
-      height: 0;
+    .iframe-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
       overflow: hidden;
-      border: 2px solid #3b82f6;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      background-color: white;
     }
 
     iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      overflow: hidden; /* ini kunci utama agar scrollbar hilang */
+      border: 2px solid #3b82f6;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 95%;
+      max-width: 800px;
+      min-height: 100vh; /* set tinggi minimal 1 layar penuh */
+      transition: height 0.4s ease;
+      overflow: hidden;
     }
 
-    @media (min-width: 600px) {
-      .iframe-container {
-        padding-bottom: 90%;
+    @media (max-width: 600px) {
+      iframe {
+        min-height: 110vh;
       }
+    }
+
+    footer {
+      font-size: 0.9rem;
+      color: #475569;
+      margin: 12px 0;
+    }
+
+    footer a {
+      color: #3b82f6;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="iframe-container">
+  <div class="iframe-wrapper">
     <iframe
+      id="absensiFrame"
       src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
       title="Form Absensi MBG"
       scrolling="no"
       sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
     </iframe>
   </div>
+
+  <footer>
+    Created by
+    <a href="https://wa.me/6285133371984" target="_blank" title="Hubungi saya lewat WA">
+      Muhammad Septi Rosidi
+    </a>
+  </footer>
+
+  <script>
+    // Simulasi auto-height tanpa akses cross-domain
+    // Tambah tinggi otomatis jika isi iframe butuh ruang lebih
+    const iframe = document.getElementById("absensiFrame");
+    let baseHeight = window.innerHeight * 1.1;
+
+    function adjustIframeHeight() {
+      // Set tinggi dinamis berdasar tinggi jendela + tambahan
+      iframe.style.height = baseHeight + "px";
+
+      // Jika user resize jendela, sesuaikan ulang
+      window.addEventListener("resize", () => {
+        baseHeight = window.innerHeight * 1.1;
+        iframe.style.height = baseHeight + "px";
+      });
+    }
+
+    adjustIframeHeight();
+  </script>
 </body>
 </html>
