@@ -3,127 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Form Kehadiran</title>
+  <title>Form Kehadiran Karyawan</title>
   <style>
-    /* ==== STYLE DASAR ==== */
+    /* ===== STYLE UMUM ===== */
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f1f5f9;
-      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f2fe, #f1f5f9);
       margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
     }
 
-    form {
+    .wrapper {
+      width: 100%;
       max-width: 480px;
-      margin: 0 auto;
+      margin: 40px 20px;
       background: #ffffff;
-      padding: 24px 20px;
-      border-radius: 16px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      padding: 28px 26px;
+      box-sizing: border-box;
     }
 
     h2 {
       text-align: center;
-      color: #1e293b;
-      margin-bottom: 20px;
-      font-size: 1.3rem;
+      color: #1e3a8a;
+      margin-bottom: 24px;
+      font-size: 1.4rem;
+      letter-spacing: 0.3px;
     }
 
-    /* ==== INPUT DAN LABEL ==== */
+    /* ===== FORM INPUT ===== */
+    label {
+      display: block;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+      margin-top: 14px;
+    }
+
     input, select, textarea {
       width: 100%;
       padding: 12px 14px;
-      margin-top: 8px;
-      margin-bottom: 16px;
       border: 1px solid #cbd5e1;
       border-radius: 10px;
-      font-size: 1rem;
+      font-size: 15px;
+      background-color: #f9fafb;
       box-sizing: border-box;
       transition: all 0.2s ease;
-      background-color: #f9fafb;
     }
 
     input:focus, select:focus, textarea:focus {
       border-color: #2563eb;
       outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
     }
 
     textarea {
-      min-height: 80px;
       resize: vertical;
+      min-height: 80px;
     }
 
-    /* ==== TOMBOL ==== */
+    /* ===== BUTTON ===== */
     button {
       width: 100%;
-      background: #2563eb;
-      color: #fff;
-      padding: 12px;
+      margin-top: 22px;
+      padding: 13px;
       font-size: 1rem;
       font-weight: 600;
+      background-color: #2563eb;
+      color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background 0.25s ease, transform 0.1s ease;
+      transition: all 0.25s ease;
     }
 
     button:hover {
-      background: #1e40af;
+      background-color: #1e40af;
       transform: translateY(-1px);
     }
 
-    /* ==== STATUS ==== */
+    /* ===== STATUS ===== */
     #status {
-      margin-top: 14px;
-      font-size: 0.95em;
-      font-weight: 500;
       text-align: center;
+      margin-top: 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
       color: #475569;
     }
 
-    /* ==== RESPONSIF UNTUK HP ==== */
+    /* ===== RESPONSIF HP ===== */
     @media (max-width: 480px) {
       body {
-        padding: 12px;
+        align-items: flex-start;
       }
-      form {
-        padding: 18px 14px;
-        border-radius: 12px;
+
+      .wrapper {
+        margin: 20px 12px;
+        padding: 22px 18px;
       }
+
+      h2 {
+        font-size: 1.2rem;
+        margin-bottom: 18px;
+      }
+
+      label {
+        font-size: 0.95rem;
+      }
+
       input, select, textarea {
         font-size: 0.95rem;
-        padding: 10px 12px;
       }
+
       button {
-        font-size: 1rem;
-        padding: 10px;
+        font-size: 0.95rem;
+        padding: 11px;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="wrapper">
+    <h2>📋 Form Kehadiran Karyawan</h2>
 
-  <form id="attendanceForm">
-    <h2>📋 Form Kehadiran</h2>
-    <input type="text" name="nama" placeholder="Nama Lengkap" required>
-    <input type="text" name="jabatan" placeholder="Jabatan" required>
-    <input type="date" name="tanggal" required>
-    <input type="time" name="jamDatang" required>
-    <input type="time" name="jamPulang" required>
-    <select name="statusKehadiran" required>
-      <option value="">-- Pilih Status Kehadiran --</option>
-      <option>Hadir</option>
-      <option>Izin</option>
-      <option>Sakit</option>
-      <option>Alpa</option>
-    </select>
-    <textarea name="keterangan" placeholder="Keterangan tambahan..."></textarea>
-    <button type="submit">Simpan Kehadiran</button>
-    <div id="status"></div>
-  </form>
+    <form id="attendanceForm">
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama" placeholder="Masukkan nama lengkap" required>
+
+      <label>Jabatan</label>
+      <input type="text" name="jabatan" placeholder="Masukkan jabatan" required>
+
+      <label>Tanggal</label>
+      <input type="date" name="tanggal" required>
+
+      <label>Jam Datang</label>
+      <input type="time" name="jamDatang" required>
+
+      <label>Jam Pulang</label>
+      <input type="time" name="jamPulang">
+
+      <label>Status Kehadiran</label>
+      <select name="statusKehadiran" required>
+        <option value="">-- Pilih Status Kehadiran --</option>
+        <option>Hadir</option>
+        <option>Izin</option>
+        <option>Sakit</option>
+        <option>Alpa</option>
+      </select>
+
+      <label>Keterangan</label>
+      <textarea name="keterangan" placeholder="Tambahkan keterangan jika ada..."></textarea>
+
+      <button type="submit">Simpan Kehadiran</button>
+      <div id="status"></div>
+    </form>
+  </div>
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbxaSi5I5lnc9R98lrvDIUBFSMdCZrGZsQQYNDcWfh-Qq2b5eblmgV9yaGLfK-v4/exec";
@@ -133,14 +174,19 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       statusDiv.textContent = "⏳ Menyimpan data...";
+      statusDiv.style.color = "#64748b";
+
       const formData = new FormData(form);
+
       try {
         await fetch(scriptURL, { method: "POST", body: formData });
         statusDiv.textContent = "✅ Data berhasil disimpan!";
+        statusDiv.style.color = "green";
         form.reset();
       } catch (err) {
         console.error(err);
         statusDiv.textContent = "❌ Gagal menyimpan data!";
+        statusDiv.style.color = "red";
       }
     });
   </script>
