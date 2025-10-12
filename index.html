@@ -5,37 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Form Absensi MBG</title>
   <style>
-    /* 1. Reset Global dan Kontrol Scroll Utama */
+    /* === 1. Reset dan Kontrol Scroll Global === */
     html, body {
       margin: 0 !important;
       padding: 0 !important;
       height: 100%;
       width: 100%;
-      overflow: hidden !important; 
-      background: #f8fafc; /* Warna latar belakang jarak */
+      overflow: hidden !important;
+      background: #f8fafc;
     }
 
-    /* 2. Kontrol IFRAME */
+    /* === 2. Ruang Atas dan Bawah === */
+    body {
+      padding-top: 40px !important;
+      padding-bottom: 60px !important; /* tambahkan lebih banyak ruang di bawah */
+    }
+
+    /* === 3. Iframe Styling === */
     iframe {
-      position: fixed; 
-      
-      /* Jarak Atas (misalnya 40px) */
-      top: 40px; 
+      position: absolute;
+      top: 40px; /* sesuai padding atas */
       left: 0;
-      
       width: 100vw;
+      height: calc(100vh - 100px) !important; 
+      /* hitungannya: 40px atas + 60px bawah = 100px */
       
-      /* **KUNCI BARU UNTUK TINGGI:** Gunakan top dan bottom bersamaan. */
-      /* Tinggi sekarang ditentukan oleh (100% - top - bottom) */
-      height: auto; /* Biarkan browser menghitung tingginya berdasarkan top dan bottom */
-      
-      border: 0 !important; 
-      outline: none !important; 
-      overflow: hidden !important; 
+      border: none !important;
+      outline: none !important;
+      overflow: hidden !important;
       scrollbar-width: none;
+      background: transparent;
     }
 
-    /* Hilangkan scrollbar di dalam iframe untuk Webkit */
+    /* Hilangkan scrollbar di Webkit browser */
     iframe::-webkit-scrollbar {
       display: none !important;
       width: 0 !important;
@@ -53,6 +55,3 @@
   </iframe>
 </body>
 </html>
-
-
-
