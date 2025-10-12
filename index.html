@@ -1,127 +1,215 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Pencatatan Kehadiran</title>
-
-  <!-- Font & Bootstrap -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    :root {
-      --primary-color: #2563eb;
-      --secondary-color: #64748b;
-      --bg-light: #f4f7fa;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
-      margin: 0;
-      padding: 0;
-      color: #1f2937;
-      overflow-x: hidden;
-    }
-
-    /* Wrapper utama */
-    .iframe-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      width: 100%;
-      padding-top: 10px; /* ✨ tambahkan jarak di atas */
-      padding-bottom: 0px;
-    }
-
-    /* Container iframe */
-    .iframe-container {
-      width: 100%;
-      max-width: 850px;
-      border-radius: 18px;
-      background: transparent;
-      box-shadow: none;
-      overflow: hidden;
-    }
-
-    /* Iframe styling */
-    iframe {
-      display: block;
-      width: 100%;
-      height: 100vh;
-      border: none;
-      background: transparent;
-      overflow: hidden;
-      scrollbar-width: none;
-    }
-
-    iframe::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 0px 0;
-      color: #6b7280;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Responsif */
-    @media (max-width: 768px) {
-      iframe {
-        height: 95vh;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base target="_top">
+    <title>Form Kehadiran MBG</title>
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1e3a8a;
+        --text: #111827;
+        --bg: #f8fafc;
+        --radius: 14px;
       }
-      .iframe-wrapper {
-        padding-top: 40px;
+
+      * {
+        box-sizing: border-box;
+        transition: all 0.2s ease;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <header></header>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
+      }
 
-  <div class="iframe-wrapper">
-    <div class="iframe-container">
-      <iframe
-        src="https://script.google.com/macros/s/AKfycbwaDJKeljXky8xLONmF1g3PegKvF_qRisZVBPgCIyN-I7-6zhmRYzMQUG7LqzmW9bav/exec"
-        title="Form Kehadiran"
-        allow="camera; microphone"
-        scrolling="no"
-        loading="lazy"
-        allowtransparency="true">
-      </iframe>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* 🚫 Hilangkan scrollbar */
+      }
+
+      .container {
+        background: white;
+        width: 100%;
+        max-width: 500px;
+        border-radius: var(--radius);
+        padding: 32px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        overflow-y: auto; /* scroll hanya kalau isi form terlalu panjang */
+        max-height: 95vh; /* tetap muat di layar kecil */
+      }
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 12px;
+      }
+
+      .logo img {
+        width: 80px;
+        height: auto;
+        border-radius: 12px;
+      }
+
+      .header-bar {
+        background: var(--primary);
+        height: 5px;
+        border-radius: 5px;
+        width: 60px;
+        margin: 0 auto 20px auto;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 24px;
+        color: var(--primary-dark);
+        font-size: 1.6rem;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-top: 14px;
+        color: var(--text);
+      }
+
+      input, select, textarea {
+        width: 100%;
+        margin-top: 6px;
+        padding: 12px 14px;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 8px;
+        font-size: 15px;
+        background: #f9fafb;
+      }
+
+      input:focus, select:focus, textarea:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        outline: none;
+        background: white;
+      }
+
+      button {
+        margin-top: 28px;
+        width: 100%;
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 14px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+      }
+
+      button:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+      }
+
+      button:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      }
+
+      #statusMsg {
+        margin-top: 18px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 15px;
+      }
+
+      @media (max-width: 520px) {
+        .container {
+          padding: 24px 20px;
+          box-shadow: none;
+          border-radius: 10px;
+          max-height: 100vh;
+        }
+        h2 { font-size: 1.3rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="logo">
+        <img src="https://lh7-rt.googleusercontent.com/sitesz/AClOY7oMT-H6UMb2QCMiqcl0vm1_puPMXJh76Ez8VKlXPBsMznRfcL_e3HutumTuRVLEgeDHnQRlYE6xVT3_gcnz9FAhjKoYgs0u1aON1iSjjeWKg114rnP185x7Gnb41OW3a24bGjWLawfTZAONi-q7RHOc1ePdyC6q9q28kdd0ffYfmRVu83Kz?key=IJ_3kFJvCEEReyG_DLtRkwLH" alt="Logo MBG">
+      </div>
+      <div class="header-bar"></div>
+      <h2>📋 DAFTAR HADIR</h2>
+
+      <form id="kehadiranForm">
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama" placeholder="Masukkan nama lengkap" required>
+
+        <label>Jabatan</label>
+        <input type="text" name="jabatan" placeholder="Contoh: Staff, Kepala Dapur" required>
+
+        <label>Tanggal</label>
+        <input type="date" name="tanggal">
+
+        <label>Jam Datang</label>
+        <input type="time" name="jamDatang">
+
+        <label>Jam Pulang</label>
+        <input type="time" name="jamPulang">
+
+        <label>Status Kehadiran</label>
+        <select name="status" required>
+          <option value="">-- Pilih Status --</option>
+          <option value="Hadir">Hadir</option>
+          <option value="Izin">Izin</option>
+          <option value="Sakit">Sakit</option>
+          <option value="Alpa">Alpa</option>
+        </select>
+
+        <label>Keterangan</label>
+        <textarea name="keterangan" rows="3" placeholder="Tambahkan keterangan jika ada..."></textarea>
+
+        <button type="submit">💾 Kirim Data</button>
+      </form>
+
+      <p id="statusMsg"></p>
     </div>
-  </div>
 
-  <footer>
-    © 2025 Created by 
-    <a href="https://wa.me/6285133371984" target="_blank" rel="noopener noreferrer">
-      Muhammad Septi Rosidi
-    </a>
-  </footer>
-</body>
+    <script>
+      const form = document.getElementById('kehadiranForm');
+      const statusMsg = document.getElementById('statusMsg');
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        statusMsg.textContent = '⏳ Mengirim data...';
+        statusMsg.style.color = '#374151';
+
+        const formData = Object.fromEntries(new FormData(form).entries());
+
+        google.script.run
+          .withSuccessHandler(function(res) {
+            if (res && res.success) {
+              statusMsg.style.color = '#16a34a';
+              statusMsg.textContent = res.message || '✅ Data berhasil disimpan!';
+              form.reset();
+            } else {
+              statusMsg.style.color = '#dc2626';
+              statusMsg.textContent = res.message || '❌ Gagal menyimpan data.';
+            }
+          })
+          .withFailureHandler(function(err) {
+            statusMsg.style.color = '#dc2626';
+            statusMsg.textContent = '⚠️ Error: ' + (err.message || 'Tidak diketahui');
+          })
+          .submitForm(formData);
+      });
+    </script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
