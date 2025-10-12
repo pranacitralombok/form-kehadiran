@@ -2,71 +2,36 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Form Absensi MBG</title>
   <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background-color: #f8fafc;
-      text-align: center;
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      overflow: hidden; /* sembunyikan scrollbar seluruh halaman */
+      background: #f8fafc;
     }
 
-    .iframe-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+    .iframe-full {
+      position: fixed; /* tempel di seluruh layar */
+      top: 0;
+      left: 0;
       width: 100%;
-      overflow: hidden;
-    }
-
-    iframe {
-      width: 95%;
-      max-width: 800px;
-      min-height: 100vh; /* set tinggi minimal 1 layar penuh */
-      transition: height 0.4s ease;
-      overflow: hidden;
-    }
-
-    @media (max-width: 600px) {
-      iframe {
-        min-height: 110vh;
-      }
+      height: 100%;
+      border: none; /* hilangkan bingkai */
+      outline: none;
+      overflow: hidden; /* pastikan tidak ada scroll di dalam iframe */
     }
   </style>
 </head>
 <body>
-  <div class="iframe-wrapper">
-    <iframe
-      id="absensiFrame"
-      src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
-      title="Form Absensi MBG"
-      scrolling="no"
-      sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-    </iframe>
-  </div>
-
-  <script>
-    // Simulasi auto-height tanpa akses cross-domain
-    // Tambah tinggi otomatis jika isi iframe butuh ruang lebih
-    const iframe = document.getElementById("absensiFrame");
-    let baseHeight = window.innerHeight * 1.1;
-
-    function adjustIframeHeight() {
-      // Set tinggi dinamis berdasar tinggi jendela + tambahan
-      iframe.style.height = baseHeight + "px";
-
-      // Jika user resize jendela, sesuaikan ulang
-      window.addEventListener("resize", () => {
-        baseHeight = window.innerHeight * 1.1;
-        iframe.style.height = baseHeight + "px";
-      });
-    }
-
-    adjustIframeHeight();
-  </script>
+  <iframe
+    class="iframe-full"
+    src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
+    title="Form Absensi MBG"
+    scrolling="no"
+    sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+  </iframe>
 </body>
 </html>
-
-
-
