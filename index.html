@@ -5,29 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Form Absensi MBG</title>
   <style>
+    /* 1. Atur HTML dan BODY agar menutupi seluruh layar dan matikan scroll */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       width: 100%;
-      overflow: hidden !important; /* kunci agar scrollbar tidak muncul */
+      overflow: hidden; /* **Kunci** untuk menghilangkan scrollbar utama */
       background: #f8fafc;
     }
 
+    /* 2. Atur IFRAME agar menutupi seluruh area layar (viewport) */
     iframe {
-      position: fixed;
+      position: fixed; /* Penting untuk menempatkan secara absolut relatif terhadap viewport */
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      border: none;
+      width: 100vw; /* Lebar penuh viewport */
+      height: 100vh; /* Tinggi penuh viewport */
+      border: none; /* **Kunci** untuk menghilangkan bingkai (border) */
       outline: none;
-      overflow: hidden;
+      /* Pastikan konten di dalam iframe tidak menyebabkan scroll */
+      overflow: hidden; 
+      /* Properti tambahan untuk menghilangkan scrollbar di dalam iframe jika muncul*/
       scrollbar-width: none; /* untuk Firefox */
     }
 
+    /* Hilangkan scrollbar di dalam iframe untuk Chrome/Safari/Edge */
     iframe::-webkit-scrollbar {
-      display: none; /* untuk Chrome/Safari */
+      display: none;
     }
   </style>
 </head>
@@ -35,15 +40,9 @@
   <iframe
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
-    scrolling="no"
+    scrolling="no" /* Atribut HTML langsung untuk memastikan scroll off (meski CSS lebih kuat) */
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
   </iframe>
 
-  <script>
-    // Pastikan tidak bisa scroll ke mana pun
-    window.scrollTo(0, 0);
-    window.addEventListener('scroll', () => window.scrollTo(0, 0));
-    document.body.style.overflow = 'hidden';
-  </script>
-</body>
+  </body>
 </html>
