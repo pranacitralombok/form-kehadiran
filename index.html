@@ -1,213 +1,101 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistem Pencatatan Kehadiran | Muhammad Septi Rosidi</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Absensi MBG</title>
+  <link rel="icon" href="https://www.bgn.go.id/BGN_LOGO.png" type="image/png" />
   <style>
-    :root {
-      --primary-color: #2563eb;
-      --secondary-color: #64748b;
-      --bg-light: #f4f7fa;
-      --shadow-lg: none; 
-      --footer-height: 55px; /* Tentukan tinggi footer */
-    }
-
-    /* === 1. KUNCI: MENGHILANGKAN SCROLLBAR UTAMA DAN FOOTER FIXED === */
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
-      min-height: 100vh; 
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      text-align: center;
       margin: 0;
       padding: 0;
-      color: #1f2937;
-      display: flex; 
-      flex-direction: column; 
-      overflow-x: hidden;
-      
-      /* MENGHILANGKAN SCROLLBAR BROWSER UTAMA */
-      overflow-y: hidden; 
-      /* MEMBERI RUANG UNTUK FOOTER FIXED */
-      padding-bottom: var(--footer-height); 
-    }
-    
-    /* SCROLLBAR UNTUK BROWSER BERBASIS WEBKIT (Chrome, Safari) */
-    body::-webkit-scrollbar {
-        display: none;
     }
 
-    /* Wrapper utama - Main Content */
-    main {
-      flex: 1; 
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      width: 100%;
-      /* TINGGI SISA VIEWPORT */
-      height: calc(100vh - var(--footer-height)); 
-      padding-top: 0px; 
-      padding-bottom: 0px;
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 16px;
     }
 
-    /* Container iframe */
+    header img {
+      height: 80px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin: 12px 0 20px;
+      color: #0f172a;
+    }
+
     .iframe-container {
-      width: 100%; 
-      max-width: 850px;
-      border-radius: 18px;
-      background: transparent;
-      box-shadow: var(--shadow-lg); /* MENGHILANGKAN BINGKAI LUAR KEDUA */
-      /* PASTIKAN CONTAINER TIDAK SCROLL */
-      overflow-y: hidden; 
-      position: relative; 
-      transition: all 0.3s ease; 
-      margin: 0; 
-      height: 100%; /* Mengisi tinggi main */
-      border-radius: 0;
+      position: relative;
+      width: 95%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-bottom: 140%;
+      height: 0;
+      overflow: hidden;
+      border: 2px solid #3b82f6;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: white;
     }
 
-    /* Loading Overlay (Tingginya mengikuti iframe-container) */
-    .loading-overlay {
+    iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 10;
-      border-radius: 0; 
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-
-    /* Iframe styling */
-    iframe {
-      display: block;
-      width: 100%;
-      height: 100%; /* Mengisi penuh tinggi container */
-      min-height: 700px;
       border: none;
-      background: transparent;
-      opacity: 0; 
-      transition: opacity 0.5s ease;
-      /* PASTIKAN SCROLLBAR DI DALAM IFRAME JUGA HILANG */
-      overflow-y: hidden; 
-    }
-    
-    iframe::-webkit-scrollbar {
-        display: none;
     }
 
-    .iframe-loaded iframe {
-      opacity: 1;
-    }
-
-    .iframe-loaded .loading-overlay {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    /* FOOTER FIXED */
     footer {
-      position: fixed; 
-      bottom: 0;
-      left: 0;
-      text-align: center;
-      padding: 15px 0;
-      color: #6b7280;
+      margin-top: 16px;
       font-size: 0.9rem;
-      border-top: 1px solid #e5e7eb;
-      background: #ffffff;
-      width: 100%; 
-      height: var(--footer-height); 
-      z-index: 100;
+      color: #475569;
     }
 
     footer a {
-      color: var(--primary-color);
+      color: #3b82f6;
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.2s ease;
     }
 
     footer a:hover {
       text-decoration: underline;
-      color: #1e40af;
     }
 
-    /* Responsif */
-    @media (max-width: 768px) {
-      :root {
-        --footer-height: 45px; 
-      }
-      body {
-        padding-bottom: var(--footer-height);
-      }
-      main {
-        height: calc(100vh - var(--footer-height));
-      }
+    @media (min-width: 600px) {
       .iframe-container {
-        max-width: 100%;
-        width: 100%;
-        margin: 0;
-        border-radius: 0;
-      }
-      iframe {
-        height: 100%; 
-        min-height: 500px;
+        padding-bottom: 90%;
       }
     }
   </style>
 </head>
-
 <body>
-  <main class="iframe-wrapper">
-    <div id="iframe-container" class="iframe-container">
-      <div class="loading-overlay">
-        <div class="spinner-border text-primary me-2" role="status">
-          <span class="visually-hidden">Memuat...</span>
-        </div>
-        Memuat Form Kehadiran...
-      </div>
-      
-      <iframe
-        id="attendance-iframe"
-        src="https://script.google.com/macros/s/AKfycbwWjoBLr_OBhMiw-MJN-6Zl3YpqcyxU60gVDhf1Jq2_JLH-St_oHtmaGhxxj1zs7ftawg/exec"
-        title="Form Kehadiran"
-        allow="camera; microphone"
-        loading="lazy"
-        allowtransparency="true"
-        frameborder="0">
-      </iframe>
-    </div>
-  </main>
+  <header>
+    <img src="https://www.bgn.go.id/BGN_LOGO.png" alt="Logo MBG" />
+    <h1>Form Absensi MBG (Makanan Bergizi Gratis)</h1>
+  </header>
+
+  <div class="iframe-container">
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
+      title="Form Absensi MBG"
+      sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+    </iframe>
+  </div>
 
   <footer>
-    © 2025 Created by&nbsp;
-    <a href="https://wa.me/6285133371984" target="_blank" rel="noopener noreferrer">
+    Created by
+    <a href="https://wa.me/6285133371984" title="Hubungi saya lewat WA" target="_blank">
       Muhammad Septi Rosidi
     </a>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.getElementById('attendance-iframe').onload = function() {
-      setTimeout(function() {
-        document.getElementById('iframe-container').classList.add('iframe-loaded');
-      }, 500); 
-    };
-  </script>
 </body>
 </html>
-
