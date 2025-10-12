@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Absensi MBG</title>
   <style>
-    /* Hilangkan semua margin dan padding default */
+    /* Hilangkan semua margin, padding, scrollbar, dan batas halaman */
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden; /* Hilangkan scrollbar */
-      background: #f8fafc; /* Warna latar belakang */
+      overflow: hidden; /* Hilangkan scrollbar halaman utama */
+      background: #ffffff; /* Warna latar belakang putih polos */
     }
 
-    /* Iframe fullscreen */
+    /* Atur iframe agar menutupi layar sepenuhnya */
     iframe {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
       border: none;
       outline: none;
-      overflow: hidden;
+      display: block;
+      background: transparent;
     }
 
-    /* Hilangkan scrollbar di dalam iframe (Chrome, Safari, Edge) */
+    /* Hilangkan scrollbar di dalam iframe (jika muncul) */
     iframe::-webkit-scrollbar {
       display: none;
     }
@@ -38,6 +39,7 @@
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
     scrolling="no"
+    allowtransparency="true"
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
   </iframe>
 </body>
