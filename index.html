@@ -10,6 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
+    /* CSS Variables */
     :root {
       --primary-color: #2563eb;
       --secondary-color: #64748b;
@@ -17,39 +18,40 @@
       --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
 
+    /* 1. Perbaikan untuk Sticky Footer */
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
-      min-height: 100vh; /* Agar gradien menutupi seluruh halaman */
+      min-height: 100vh; /* WAJIB: Agar Flexbox mengisi seluruh viewport */
       margin: 0;
       padding: 0;
       color: #1f2937;
-      display: flex; /* Untuk tata letak vertikal */
-      flex-direction: column; /* Untuk tata letak vertikal */
+      display: flex; /* WAJIB: Mengubah body menjadi Flex Container */
+      flex-direction: column; /* WAJIB: Tata letak vertikal */
       overflow-x: hidden;
     }
 
     /* Wrapper utama - Main Content */
     main {
-      flex: 1; /* Memastikan main mengambil semua ruang yang tersedia */
+      flex: 1; /* WAJIB: Memungkinkan main mengambil semua ruang yang tersisa, mendorong footer ke bawah */
       display: flex;
       justify-content: center;
       align-items: flex-start;
       width: 100%;
-      padding-top: 20px; /* Jarak atas sedikit ditingkatkan */
+      padding-top: 20px;
       padding-bottom: 20px;
     }
 
     /* Container iframe */
     .iframe-container {
-      width: 95%; /* Sedikit diperlebar di tampilan desktop */
+      width: 95%;
       max-width: 850px;
       border-radius: 18px;
-      background: #ffffff; /* Beri latar belakang putih */
-      box-shadow: var(--shadow-lg); /* Tambahkan bayangan yang lebih jelas */
+      background: #ffffff;
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
-      position: relative; /* Untuk penempatan loading overlay */
-      transition: all 0.3s ease; /* Tambahkan transisi */
+      position: relative;
+      transition: all 0.3s ease;
     }
 
     /* Loading Overlay */
@@ -76,12 +78,14 @@
     iframe {
       display: block;
       width: 100%;
-      height: 100vh; /* Tinggi penuh viewport */
-      min-height: 600px; /* Tinggi minimum untuk tampilan desktop */
+      /* 2. Mengubah tinggi agar lebih realistis. Konten di dalamnya yang akan di-scroll. */
+      height: 95vh; 
+      min-height: 700px;
       border: none;
       background: transparent;
-      opacity: 0; /* Mulai dengan tidak terlihat */
+      opacity: 0;
       transition: opacity 0.5s ease;
+      /* Hapus scrolling="no" dari tag dan CSS */
     }
 
     /* Status Iframe Loaded */
@@ -92,6 +96,7 @@
     .iframe-loaded .loading-overlay {
       opacity: 0;
       visibility: hidden;
+      pointer-events: none; /* Penting untuk interaksi */
     }
 
     /* Footer */
@@ -100,9 +105,9 @@
       padding: 15px 0;
       color: #6b7280;
       font-size: 0.9rem;
-      border-top: 1px solid #e5e7eb; /* Tambahkan pemisah */
+      border-top: 1px solid #e5e7eb;
       background: #ffffff;
-      margin-top: auto; /* Memastikan footer berada di bawah */
+      margin-top: 0; /* Pastikan tidak ada margin yang berlebihan */
     }
 
     footer a {
@@ -114,7 +119,7 @@
 
     footer a:hover {
       text-decoration: underline;
-      color: #1e40af; /* Warna hover yang lebih gelap */
+      color: #1e40af;
     }
 
     /* Responsif */
@@ -125,11 +130,11 @@
       }
       .iframe-container {
         width: 100%;
-        margin: 0 10px; /* Tambahkan margin horizontal di perangkat kecil */
-        box-shadow: none; /* Hilangkan bayangan di perangkat kecil */
+        margin: 0 10px;
+        box-shadow: none;
       }
       iframe {
-        height: 90vh; /* Sesuaikan tinggi di perangkat kecil */
+        height: 90vh; 
         min-height: 500px;
       }
     }
@@ -169,10 +174,10 @@
 
   <script>
     document.getElementById('attendance-iframe').onload = function() {
-      // Tunggu sebentar untuk memastikan konten di dalam iframe siap (Opsional)
+      // Penundaan sebentar untuk estetika
       setTimeout(function() {
         document.getElementById('iframe-container').classList.add('iframe-loaded');
-      }, 500); // 500ms penundaan tambahan
+      }, 500); 
     };
   </script>
 </body>
