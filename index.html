@@ -7,30 +7,40 @@
   <style>
     /* 1. Reset Global dan Kontrol Scroll Utama */
     html, body {
-      margin: 0 !important; /* Dikuatkan */
-      padding: 0 !important; /* Dikuatkan */
+      margin: 0 !important;
+      padding: 0 !important;
       height: 100%;
       width: 100%;
-      overflow: hidden !important; /* Dikuatkan untuk menonaktifkan scroll utama */
+      overflow: hidden !important; /* Pertahankan ini agar tidak ada scrollbar utama */
       background: #f8fafc;
     }
 
-    /* 2. Kontrol IFRAME */
-    iframe {
-      position: absolute; /* Ganti fixed ke absolute untuk kompatibilitas yang lebih luas */
-      top: 0;
-      left: 0;
-      width: 100vw; 
-      height: 100vh;
-      border: 0 !important; /* **Kunci 1: Set border ke 0 dan dikuatkan** */
-      box-sizing: border-box;
-      outline: none !important; /* **Kunci 2: Hilangkan outline yang mungkin tersisa** */
-      /* Kontrol Scroll di dalam Iframe */
-      overflow: hidden !important; /* Dikuatkan */
-      scrollbar-width: none; /* untuk Firefox */
+    /* 2. Tambahkan Jarak Pada Body */
+    body {
+      /* TAMBAHKAN JARAK DI SINI: Atas 40px, Kanan 0, Bawah 40px, Kiri 0 */
+      padding-top: 40px !important;
+      padding-bottom: 40px !important;
+      /* Tinggi efektif body sekarang adalah 100% - 80px (40 atas + 40 bawah) */
     }
 
-    /* Kunci 3: Hilangkan scrollbar di dalam iframe untuk Webkit (Chrome/Safari/Edge) */
+    /* 3. Kontrol IFRAME */
+    iframe {
+      position: absolute; 
+      top: 40px; /* **Sesuaikan posisi awal IFRAME dengan padding-top BODY** */
+      left: 0;
+      
+      /* **Sesuaikan Tinggi IFRAME** */
+      /* Hitungan: 100vh (tinggi penuh) - 40px (padding atas) - 40px (padding bawah) */
+      height: calc(100vh - 80px) !important; 
+      
+      width: 100vw;
+      border: 0 !important; 
+      outline: none !important; 
+      overflow: hidden !important; 
+      scrollbar-width: none;
+    }
+
+    /* Hilangkan scrollbar di dalam iframe untuk Webkit */
     iframe::-webkit-scrollbar {
       display: none !important;
       width: 0 !important;
@@ -42,10 +52,9 @@
   <iframe
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
-    scrolling="no" /* Pastikan atribut ini ada */
-    frameborder="0" /* **Kunci 4: Atribut HTML langsung untuk bingkai** */
+    scrolling="no"
+    frameborder="0"
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
   </iframe>
-
-  </body>
+</body>
 </html>
