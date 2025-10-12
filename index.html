@@ -5,32 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Absensi MBG</title>
   <style>
-    /* Hilangkan semua margin, padding, scrollbar, dan batas halaman */
+    /* 1. Kontrol Scroll Halaman Utama */
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0 !important;
+      padding: 0 !important;
       width: 100%;
       height: 100%;
-      overflow: hidden; /* Hilangkan scrollbar halaman utama */
-      background: #ffffff; /* Warna latar belakang putih polos */
+      /* Tetap hilangkan scroll halaman utama */
+      overflow: hidden !important; 
+      background: #f0f0f0; /* Gunakan warna yang berbeda agar padding terlihat */
     }
 
-    /* Atur iframe agar menutupi layar sepenuhnya */
+    /* 2. Atur iframe agar memiliki ruang lingkup scroll sendiri */
     iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
+      
+      /* KUNCI PERBAIKAN TINGGI */
+      /* Biarkan tinggi 100vh, tetapi setidaknya setinggi viewport */
       height: 100vh;
+      min-height: 100%; 
+      
       border: none;
       outline: none;
       display: block;
       background: transparent;
+
+      /* KUNCI PERBAIKAN SCROLL: Aktifkan scroll vertikal pada iframe */
+      overflow-y: auto !important; 
+      /* Hilangkan scroll horizontal jika ada */
+      overflow-x: hidden !important; 
+      
+      /* Agar bingkai bawaan hilang */
+      frameborder: 0;
     }
 
     /* Hilangkan scrollbar di dalam iframe (jika muncul) */
     iframe::-webkit-scrollbar {
-      display: none;
+      /* **Hapus ini untuk debugging.** Jika masih ingin scrollbar tersembunyi, */
+      /* ganti ke display: none; */
+      display: block; 
+      width: 8px; /* Tampilkan scrollbar untuk memastikan formulir tidak terpotong */
     }
   </style>
 </head>
@@ -38,7 +55,7 @@
   <iframe
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
-    scrolling="no"
+    scrolling="yes" /* Ganti 'no' menjadi 'yes' */
     allowtransparency="true"
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
   </iframe>
