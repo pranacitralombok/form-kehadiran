@@ -4,54 +4,62 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Form Kehadiran MBG</title>
+
   <style>
-    /* ====== Reset & Global ====== */
+    /* ===== Global Styles ===== */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      width: 100%;
-      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
       font-family: "Poppins", Arial, sans-serif;
-      color: #1e293b;
+      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
       overflow: hidden;
     }
 
-    /* ====== Header ====== */
     header {
-      text-align: center;
       background: #2563eb;
-      color: white;
-      padding: 12px 0;
+      color: #fff;
+      text-align: center;
+      padding: 14px 10px;
       font-size: 1.2rem;
       font-weight: 600;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      z-index: 5;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
     }
 
-    /* ====== Loading Screen ====== */
+    iframe {
+      border: none;
+      width: 100%;
+      height: calc(100vh - 60px);
+      margin-top: 60px;
+      display: block;
+      background: #fff;
+    }
+
+    /* ===== Loading Overlay ===== */
     #loading {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #f1f5f9;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #f1f5f9;
-      color: #2563eb;
       font-size: 18px;
+      color: #2563eb;
       font-weight: 600;
       z-index: 10;
       transition: opacity 0.5s ease;
     }
 
-    #loading.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* ====== Spinner ====== */
     .spinner {
       border: 4px solid #cbd5e1;
       border-top: 4px solid #2563eb;
@@ -59,31 +67,42 @@
       width: 40px;
       height: 40px;
       animation: spin 1s linear infinite;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      to { transform: rotate(360deg); }
     }
 
-    /* ====== Iframe Container ====== */
-    iframe {
-      border: none;
-      width: 100%;
-      height: calc(100vh - 60px);
-      display: block;
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
-    /* ====== Mobile-Friendly (Safe Area) ====== */
+    /* ===== Mobile Adjustments ===== */
     @media (max-width: 600px) {
       header {
         font-size: 1rem;
-        padding: 10px 0;
+        padding: 10px;
       }
       iframe {
         height: calc(100vh - 50px);
+        margin-top: 50px;
       }
+    }
+
+    /* ===== Error Message ===== */
+    #errorMsg {
+      display: none;
+      color: #dc2626;
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80%;
+      margin: 20px auto;
+      font-size: 0.95rem;
     }
   </style>
 </head>
@@ -96,10 +115,36 @@
     Memuat Form Kehadiran...
   </div>
 
-  <iframe
+  <div id="errorMsg">
+    ⚠️ Form tidak dapat dimuat.  
+    Silakan buka langsung melalui link berikut:<br>
+    <a href="https://script.google.com/macros/s/AKfycbwYCVnms_ePXUAz0Aqz96Q_wLbwRpyTBb4pnE3SJLOGN9yk-LOjPSf-p8PJb7bUDidZQg/exec" 
+       target="_blank" 
+       style="color:#2563eb;font-weight:600;">Klik di sini untuk buka Form Kehadiran</a>
+  </div>
+
+  <iframe 
     id="formFrame"
     src="https://script.google.com/macros/s/AKfycbwYCVnms_ePXUAz0Aqz96Q_wLbwRpyTBb4pnE3SJLOGN9yk-LOjPSf-p8PJb7bUDidZQg/exec"
-    onload="document.getElementById('loading').classList.add('hidden');">
+    onload="hideLoader()">
   </iframe>
+
+  <script>
+    const loading = document.getElementById('loading');
+    const errorMsg = document.getElementById('errorMsg');
+    const frame = document.getElementById('formFrame');
+
+    function hideLoader() {
+      loading.classList.add('hidden');
+    }
+
+    // Timeout jika iframe gagal dimuat (misal: diblok)
+    setTimeout(() => {
+      if (!frame.contentWindow || frame.contentWindow.length === 0) {
+        loading.classList.add('hidden');
+        errorMsg.style.display = 'block';
+      }
+    }, 6000);
+  </script>
 </body>
 </html>
