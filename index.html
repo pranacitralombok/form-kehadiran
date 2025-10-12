@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Form Kehadiran Karyawan</title>
+  <title>Form Kehadiran</title>
   <style>
-    /* ===== STYLE UMUM ===== */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #e0f2fe, #f1f5f9);
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f1f5f9;
       margin: 0;
       padding: 0;
       display: flex;
@@ -17,149 +20,75 @@
       min-height: 100vh;
     }
 
-    .wrapper {
+    .container {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
+      background: #fff;
       margin: 40px 20px;
-      background: #ffffff;
-      border-radius: 18px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      padding: 28px 26px;
-      box-sizing: border-box;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
     }
 
     h2 {
       text-align: center;
       color: #1e3a8a;
-      margin-bottom: 24px;
-      font-size: 1.4rem;
-      letter-spacing: 0.3px;
-    }
-
-    /* ===== FORM INPUT ===== */
-    label {
-      display: block;
-      font-weight: 600;
-      color: #334155;
-      margin-bottom: 6px;
-      margin-top: 14px;
+      margin-bottom: 20px;
     }
 
     input, select, textarea {
       width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #cbd5e1;
+      padding: 12px;
+      margin-bottom: 15px;
       border-radius: 10px;
+      border: 1px solid #cbd5e1;
       font-size: 15px;
-      background-color: #f9fafb;
-      box-sizing: border-box;
-      transition: all 0.2s ease;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: #2563eb;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-      background: #ffffff;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    /* ===== BUTTON ===== */
     button {
       width: 100%;
-      margin-top: 22px;
-      padding: 13px;
-      font-size: 1rem;
-      font-weight: 600;
-      background-color: #2563eb;
+      padding: 12px;
+      background: #2563eb;
       color: white;
+      font-weight: bold;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: background 0.25s;
     }
 
     button:hover {
-      background-color: #1e40af;
-      transform: translateY(-1px);
+      background: #1e40af;
     }
 
-    /* ===== STATUS ===== */
     #status {
+      margin-top: 12px;
+      font-size: 14px;
       text-align: center;
-      margin-top: 16px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #475569;
-    }
-
-    /* ===== RESPONSIF HP ===== */
-    @media (max-width: 480px) {
-      body {
-        align-items: flex-start;
-      }
-
-      .wrapper {
-        margin: 20px 12px;
-        padding: 22px 18px;
-      }
-
-      h2 {
-        font-size: 1.2rem;
-        margin-bottom: 18px;
-      }
-
-      label {
-        font-size: 0.95rem;
-      }
-
-      input, select, textarea {
-        font-size: 0.95rem;
-      }
-
-      button {
-        font-size: 0.95rem;
-        padding: 11px;
-      }
+      color: #333;
     }
   </style>
 </head>
-
 <body>
-  <div class="wrapper">
-    <h2>📋 Form Kehadiran Karyawan</h2>
-
+  <div class="container">
     <form id="attendanceForm">
-      <label>Nama Lengkap</label>
-      <input type="text" name="nama" placeholder="Masukkan nama lengkap" required>
+      <h2>Form Kehadiran</h2>
 
-      <label>Jabatan</label>
-      <input type="text" name="jabatan" placeholder="Masukkan jabatan" required>
-
-      <label>Tanggal</label>
+      <input type="text" name="nama" placeholder="Nama Lengkap" required>
+      <input type="text" name="jabatan" placeholder="Jabatan" required>
       <input type="date" name="tanggal" required>
-
-      <label>Jam Datang</label>
       <input type="time" name="jamDatang" required>
+      <input type="time" name="jamPulang" required>
 
-      <label>Jam Pulang</label>
-      <input type="time" name="jamPulang">
-
-      <label>Status Kehadiran</label>
       <select name="statusKehadiran" required>
-        <option value="">-- Pilih Status Kehadiran --</option>
+        <option value="">-- Pilih Status --</option>
         <option>Hadir</option>
         <option>Izin</option>
         <option>Sakit</option>
         <option>Alpa</option>
       </select>
 
-      <label>Keterangan</label>
-      <textarea name="keterangan" placeholder="Tambahkan keterangan jika ada..."></textarea>
+      <textarea name="keterangan" placeholder="Keterangan tambahan..."></textarea>
 
       <button type="submit">Simpan Kehadiran</button>
       <div id="status"></div>
@@ -174,19 +103,18 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       statusDiv.textContent = "⏳ Menyimpan data...";
-      statusDiv.style.color = "#64748b";
-
       const formData = new FormData(form);
 
       try {
-        await fetch(scriptURL, { method: "POST", body: formData });
-        statusDiv.textContent = "✅ Data berhasil disimpan!";
-        statusDiv.style.color = "green";
+        const response = await fetch(scriptURL, { method: "POST", body: formData });
+        const result = await response.text();
+        statusDiv.textContent = result.includes("berhasil") 
+          ? "✅ Data berhasil disimpan!"
+          : "⚠️ Gagal menyimpan data!";
         form.reset();
       } catch (err) {
+        statusDiv.textContent = "❌ Gagal mengirim data!";
         console.error(err);
-        statusDiv.textContent = "❌ Gagal menyimpan data!";
-        statusDiv.style.color = "red";
       }
     });
   </script>
