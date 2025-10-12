@@ -2,53 +2,41 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <title>Form Absensi MBG</title>
   <style>
-    /* 1. Kontrol Scroll Halaman Utama */
+    /* 1️⃣ Hapus margin dan padding global, kunci tinggi penuh */
     html, body {
-      margin: 0 !important;
-      padding: 0 !important;
+      margin: 0;
+      padding: 0;
       width: 100%;
       height: 100%;
-      /* Tetap hilangkan scroll halaman utama */
-      overflow: hidden !important; 
-      background: #f0f0f0; /* Gunakan warna yang berbeda agar padding terlihat */
+      overflow: hidden; /* hilangkan scroll utama */
+      background: #f0f0f0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeSpeed;
     }
 
-    /* 2. Atur iframe agar memiliki ruang lingkup scroll sendiri */
+    /* 2️⃣ Iframe full-screen ringan & responsif */
     iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      
-      /* KUNCI PERBAIKAN TINGGI */
-      /* Biarkan tinggi 100vh, tetapi setidaknya setinggi viewport */
-      height: 100vh;
-      min-height: 100%; 
-      padding-bottom: 10px;
-      
+      position: fixed; /* fixed lebih cepat render dibanding absolute */
+      inset: 0; /* ganti top, left, right, bottom: 0 */
+      width: 100%;
+      height: 100%;
       border: none;
       outline: none;
-      display: block;
       background: transparent;
-
-      /* KUNCI PERBAIKAN SCROLL: Aktifkan scroll vertikal pada iframe */
-      overflow-y: auto !important; 
-      /* Hilangkan scroll horizontal jika ada */
-      overflow-x: hidden !important; 
-      
-      /* Agar bingkai bawaan hilang */
-      frameborder: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scroll-behavior: smooth; /* scrolling halus di perangkat sentuh */
+      will-change: transform; /* beri hint ke GPU untuk percepat render */
+      transform: translateZ(0); /* aktifkan GPU acceleration */
     }
 
-    /* Hilangkan scrollbar di dalam iframe (jika muncul) */
+    /* 3️⃣ Sembunyikan scrollbar halus tanpa ganggu performa */
     iframe::-webkit-scrollbar {
-      /* **Hapus ini untuk debugging.** Jika masih ingin scrollbar tersembunyi, */
-      /* ganti ke display: none; */
-      display: block; 
-      width: 8px; /* Tampilkan scrollbar untuk memastikan formulir tidak terpotong */
+      width: 8px;
+      background: transparent;
     }
   </style>
 </head>
@@ -56,14 +44,10 @@
   <iframe
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
-    scrolling="yes" /* Ganti 'no' menjadi 'yes' */
-    allowtransparency="true"
-    sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+    loading="eager"   <!-- segera dimuat -->
+    referrerpolicy="no-referrer"
+    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+    allowtransparency="true">
   </iframe>
 </body>
 </html>
-
-
-
-
-
