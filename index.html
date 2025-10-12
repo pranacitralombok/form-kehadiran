@@ -18,10 +18,28 @@
 
     body {
       font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
       margin: 0;
       padding: 0;
       color: #1f2937;
       overflow-x: hidden;
+    }
+
+    .header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .header h1 {
+      font-weight: 700;
+      font-size: 2.1rem;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1.05rem;
+      color: var(--secondary-color);
     }
 
     .iframe-wrapper {
@@ -87,6 +105,10 @@
 </head>
 
 <body>
+  <header class="header">
+    <h1></h1>
+    <p></p>
+  </header>
 
   <div class="iframe-wrapper">
     <div class="iframe-container">
@@ -102,11 +124,7 @@
   </div>
 
   <footer>
-    © 2025 Created by Muhammad Septi Rosidi
+    © 2025 Created by <strong>Muhammad Septi Rosidi</strong>
   </footer>
 </body>
 </html>
-
-
-
-
