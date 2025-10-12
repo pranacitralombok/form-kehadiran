@@ -1,163 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Form Kehadiran MBG</title>
-  <style>
-    body {
-      font-family: "Poppins", Arial, sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Aplikasi Google Apps Script</title>
 
-    header {
-      background: #2563eb;
-      color: #fff;
-      text-align: center;
-      padding: 16px 10px;
-      font-size: 1.3rem;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
+    <style>
+        /* CSS Tambahan: Membuat iframe responsif */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            /* Atur rasio aspek (misalnya 4:3) - 75% */
+            padding-bottom: 75%; 
+            height: 0;
+            overflow: hidden;
+        }
 
-    form {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 450px;
-    }
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-    label {
-      display: block;
-      font-weight: 600;
-      margin-top: 12px;
-      color: #1e293b;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    button {
-      width: 100%;
-      margin-top: 20px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    button:hover {
-      background: #1e40af;
-    }
-
-    #statusMsg {
-      text-align: center;
-      margin-top: 15px;
-      font-weight: 500;
-      color: #2563eb;
-    }
-
-    footer {
-      text-align: center;
-      padding: 10px;
-      font-size: 0.85rem;
-      color: #64748b;
-    }
-
-    @media (max-width: 600px) {
-      form {
-        padding: 16px;
-      }
-    }
-  </style>
+        /* Atur padding atas/bawah */
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #f8f9fa; /* Warna latar belakang ringan */
+        }
+    </style>
 </head>
 <body>
-  <header>📋 Form Kehadiran MBG</header>
 
-  <main>
-    <form id="kehadiranForm">
-      <label>Nama Lengkap</label>
-      <input type="text" name="nama" required />
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h1 class="display-5">Formulir Pendaftaran</h1>
+                <p class="lead">Silakan isi formulir yang disematkan di bawah ini.</p>
+            </div>
+        </div>
 
-      <label>Jabatan</label>
-      <input type="text" name="jabatan" required />
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="iframe-container">
+                            <iframe
+                                src="https://script.google.com/macros/s/AKfycbwYCVnms_ePXUAz0Aqz96Q_wLbwRpyTBb4pnE3SJLOGN9yk-LOjPSf-p8PJb7bUDidZQg/exec"
+                                frameborder="0"
+                                allowfullscreen
+                            >
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
 
-      <label>Tanggal</label>
-      <input type="date" name="tanggal" required />
-
-      <label>Jam Datang</label>
-      <input type="time" name="jamDatang" />
-
-      <label>Jam Pulang</label>
-      <input type="time" name="jamPulang" />
-
-      <label>Status Kehadiran</label>
-      <select name="status" required>
-        <option value="">Pilih...</option>
-        <option value="Hadir">Hadir</option>
-        <option value="Izin">Izin</option>
-        <option value="Sakit">Sakit</option>
-        <option value="Alpa">Alpa</option>
-      </select>
-
-      <label>Keterangan</label>
-      <textarea name="keterangan" rows="3"></textarea>
-
-      <button type="submit">Kirim</button>
-      <p id="statusMsg"></p>
-    </form>
-  </main>
-
-  <footer>© 2025 MBG | Sistem Kehadiran Online</footer>
-
-  <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbwYCVnms_ePXUAz0Aqz96Q_wLbwRpyTBb4pnE3SJLOGN9yk-LOjPSf-p8PJb7bUDidZQg/exec";
-    const form = document.getElementById("kehadiranForm");
-    const statusMsg = document.getElementById("statusMsg");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      statusMsg.textContent = "Mengirim data...";
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch(scriptURL, { method: "POST", body: formData });
-        if (response.ok) {
-          statusMsg.textContent = "✅ Data berhasil dikirim!";
-          form.reset();
-        } else {
-          statusMsg.textContent = "⚠️ Gagal mengirim data.";
-        }
-      } catch (error) {
-        statusMsg.textContent = "❌ Terjadi kesalahan koneksi.";
-      }
-    });
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
