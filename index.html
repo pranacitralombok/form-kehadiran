@@ -12,28 +12,25 @@
       height: 100%;
       width: 100%;
       overflow: hidden !important; 
-      background: #f8fafc;
+      background: #f8fafc; /* Warna latar belakang jarak */
     }
 
-    /* 2. Tambahkan Jarak Vertikal (Padding) pada Body */
-    body {
-      /* PENTING: Jarak 40px di atas dan 40px di bawah */
-      padding: 90px 0 !important; /* Atas dan Bawah 40px, Kiri dan Kanan 0 */
-    }
-
-    /* 3. Kontrol IFRAME */
+    /* 2. Kontrol IFRAME */
     iframe {
-      /* Ganti position:absolute menjadi position:fixed untuk kompatibilitas viewport yang lebih baik */
       position: fixed; 
       
-      /* Geser Iframe ke bawah sebesar padding-top body (40px) */
+      /* Jarak Atas (misalnya 40px) */
       top: 40px; 
       left: 0;
       
       width: 100vw;
       
-      /* **KUNCI:** Hitung tinggi Iframe: 100vh - 80px (40px atas + 40px bawah) */
-      height: calc(100vh - 80px) !important; 
+      /* **KUNCI BARU UNTUK JARAK BAWAH:** Tentukan jarak dari bawah (bottom) */
+      bottom: 60px; /* Menentukan jarak 60px dari batas bawah layar */
+      
+      /* **KUNCI BARU UNTUK TINGGI:** Gunakan top dan bottom bersamaan. */
+      /* Tinggi sekarang ditentukan oleh (100% - top - bottom) */
+      height: auto; /* Biarkan browser menghitung tingginya berdasarkan top dan bottom */
       
       border: 0 !important; 
       outline: none !important; 
@@ -59,4 +56,3 @@
   </iframe>
 </body>
 </html>
-
