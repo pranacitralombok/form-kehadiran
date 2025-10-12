@@ -27,13 +27,19 @@
     }
 
     /* === IFRAME WRAPPER === */
-    .iframe-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      width: 100%;
-      padding: 0;
-    }
+.iframe-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  padding: 50px 10px 20px; /* atas, kanan/kiri, bawah */
+}
+
+@media (max-width: 768px) {
+  .iframe-wrapper {
+    padding-top: 30px; /* di HP lebih kecil */
+  }
+}
 
     .iframe-container {
       width: 100%;
@@ -95,3 +101,4 @@
   </footer>
 </body>
 </html>
+
