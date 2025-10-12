@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Kehadiran</title>
 
-  <!-- Font & Bootstrap -->
+  <!-- FONT & BOOTSTRAP LITE -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="preload" as="style" onload="this.rel='stylesheet'">
 
   <style>
+    /* === WARNA & DASAR === */
     :root {
       --primary-color: #2563eb;
-      --secondary-color: #64748b;
-      --bg-light: #f4f7fa;
+      --text-muted: #6b7280;
     }
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
       margin: 0;
-      padding: 0;
+      background: linear-gradient(180deg, #f9fafb 0%, #eef2f6 100%);
       color: #1f2937;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
+    /* === IFRAME WRAPPER === */
     .iframe-wrapper {
       display: flex;
       justify-content: center;
       align-items: flex-start;
       width: 100%;
+      padding: 0;
     }
 
-    /* HAPUS WARNA PUTIH KARTU */
     .iframe-container {
       width: 100%;
-      max-width: 850px;
-      border-radius: 18px;
-      background: transparent; /* 💡 transparan */
-      box-shadow: none; /* 💡 hilangkan bayangan */
+      max-width: 860px;
+      background: transparent;
+      border: none;
       overflow: hidden;
     }
 
     iframe {
-      display: block;
       width: 100%;
       height: 100vh;
       border: none;
-      background: transparent; /* 💡 iframe transparan */
-      overflow: hidden;
+      background: transparent;
+      display: block;
       scrollbar-width: none;
     }
 
@@ -56,34 +56,27 @@
       display: none;
     }
 
+    /* === FOOTER === */
     footer {
       text-align: center;
-      padding: 10px 0;
-      color: #6b7280;
+      padding: 12px 0;
       font-size: 0.9rem;
+      color: var(--text-muted);
+      background: transparent;
     }
 
-    footer a {
+    footer strong {
       color: var(--primary-color);
-      text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
-
+    /* === RESPONSIVE === */
     @media (max-width: 768px) {
-      iframe {
-        height: 95vh;
-      }
+      iframe { height: 95vh; }
     }
   </style>
 </head>
 
 <body>
-  <header class="header">
-  </header>
-
   <div class="iframe-wrapper">
     <div class="iframe-container">
       <iframe 
@@ -92,19 +85,13 @@
         allow="camera; microphone"
         scrolling="no"
         loading="lazy"
-        allowtransparency="true"
-      ></iframe>
+        allowtransparency="true">
+      </iframe>
     </div>
   </div>
+
   <footer>
     © 2025 Created by <strong>Muhammad Septi Rosidi</strong>
   </footer>
 </body>
 </html>
-
-
-
-
-
-
-
