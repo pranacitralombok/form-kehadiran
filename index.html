@@ -5,34 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Form Absensi MBG</title>
   <style>
-    /* 1. Atur HTML dan BODY agar menutupi seluruh layar dan matikan scroll */
+    /* 1. Reset Global dan Kontrol Scroll Utama */
     html, body {
-      margin: 0;
-      padding: 0;
+      margin: 0 !important; /* Dikuatkan */
+      padding: 0 !important; /* Dikuatkan */
       height: 100%;
       width: 100%;
-      overflow: hidden; /* **Kunci** untuk menghilangkan scrollbar utama */
+      overflow: hidden !important; /* Dikuatkan untuk menonaktifkan scroll utama */
       background: #f8fafc;
     }
 
-    /* 2. Atur IFRAME agar menutupi seluruh area layar (viewport) */
+    /* 2. Kontrol IFRAME */
     iframe {
-      position: fixed; /* Penting untuk menempatkan secara absolut relatif terhadap viewport */
+      position: absolute; /* Ganti fixed ke absolute untuk kompatibilitas yang lebih luas */
       top: 0;
       left: 0;
-      width: 100vw; /* Lebar penuh viewport */
-      height: 100vh; /* Tinggi penuh viewport */
-      border: none; /* **Kunci** untuk menghilangkan bingkai (border) */
-      outline: none;
-      /* Pastikan konten di dalam iframe tidak menyebabkan scroll */
-      overflow: hidden; 
-      /* Properti tambahan untuk menghilangkan scrollbar di dalam iframe jika muncul*/
+      width: 100vw; 
+      height: 100vh;
+      border: 0 !important; /* **Kunci 1: Set border ke 0 dan dikuatkan** */
+      box-sizing: border-box;
+      outline: none !important; /* **Kunci 2: Hilangkan outline yang mungkin tersisa** */
+      /* Kontrol Scroll di dalam Iframe */
+      overflow: hidden !important; /* Dikuatkan */
       scrollbar-width: none; /* untuk Firefox */
     }
 
-    /* Hilangkan scrollbar di dalam iframe untuk Chrome/Safari/Edge */
+    /* Kunci 3: Hilangkan scrollbar di dalam iframe untuk Webkit (Chrome/Safari/Edge) */
     iframe::-webkit-scrollbar {
-      display: none;
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
     }
   </style>
 </head>
@@ -40,7 +42,8 @@
   <iframe
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
-    scrolling="no" /* Atribut HTML langsung untuk memastikan scroll off (meski CSS lebih kuat) */
+    scrolling="no" /* Pastikan atribut ini ada */
+    frameborder="0" /* **Kunci 4: Atribut HTML langsung untuk bingkai** */
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
   </iframe>
 
