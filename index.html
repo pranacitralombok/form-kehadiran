@@ -9,29 +9,41 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* sembunyikan scrollbar seluruh halaman */
+      width: 100%;
+      overflow: hidden !important; /* kunci agar scrollbar tidak muncul */
       background: #f8fafc;
     }
 
-    .iframe-full {
-      position: fixed; /* tempel di seluruh layar */
+    iframe {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      border: none; /* hilangkan bingkai */
+      width: 100vw;
+      height: 100vh;
+      border: none;
       outline: none;
-      overflow: hidden; /* pastikan tidak ada scroll di dalam iframe */
+      overflow: hidden;
+      scrollbar-width: none; /* untuk Firefox */
+    }
+
+    iframe::-webkit-scrollbar {
+      display: none; /* untuk Chrome/Safari */
     }
   </style>
 </head>
 <body>
   <iframe
-    class="iframe-full"
     src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
     title="Form Absensi MBG"
     scrolling="no"
     sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
   </iframe>
+
+  <script>
+    // Pastikan tidak bisa scroll ke mana pun
+    window.scrollTo(0, 0);
+    window.addEventListener('scroll', () => window.scrollTo(0, 0));
+    document.body.style.overflow = 'hidden';
+  </script>
 </body>
 </html>
