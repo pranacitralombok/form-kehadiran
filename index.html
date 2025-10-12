@@ -1,14 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Form Kehadiran</title>
-<style>
-  body { margin: 0; }
-  iframe { border: none; width: 100%; height: 100vh; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Kehadiran MBG</title>
+  <style>
+    /* ====== Reset & Global ====== */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+      font-family: "Poppins", Arial, sans-serif;
+      color: #1e293b;
+      overflow: hidden;
+    }
+
+    /* ====== Header ====== */
+    header {
+      text-align: center;
+      background: #2563eb;
+      color: white;
+      padding: 12px 0;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      letter-spacing: 0.5px;
+    }
+
+    /* ====== Loading Screen ====== */
+    #loading {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f1f5f9;
+      color: #2563eb;
+      font-size: 18px;
+      font-weight: 600;
+      z-index: 10;
+      transition: opacity 0.5s ease;
+    }
+
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ====== Spinner ====== */
+    .spinner {
+      border: 4px solid #cbd5e1;
+      border-top: 4px solid #2563eb;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ====== Iframe Container ====== */
+    iframe {
+      border: none;
+      width: 100%;
+      height: calc(100vh - 60px);
+      display: block;
+    }
+
+    /* ====== Mobile-Friendly (Safe Area) ====== */
+    @media (max-width: 600px) {
+      header {
+        font-size: 1rem;
+        padding: 10px 0;
+      }
+      iframe {
+        height: calc(100vh - 50px);
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <iframe src="https://script.google.com/macros/s/AKfycbwYCVnms_ePXUAz0Aqz96Q_wLbwRpyTBb4pnE3SJLOGN9yk-LOjPSf-p8PJb7bUDidZQg/exec"></iframe>
+  <header>📋 Form Kehadiran MBG</header>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    Memuat Form Kehadiran...
+  </div>
+
+  <iframe
+    id="formFrame"
+    src="https://script.google.com/macros/s/AKfycbwYCVnms_ePXUAz0Aqz96Q_wLbwRpyTBb4pnE3SJLOGN9yk-LOjPSf-p8PJb7bUDidZQg/exec"
+    onload="document.getElementById('loading').classList.add('hidden');">
+  </iframe>
 </body>
 </html>
