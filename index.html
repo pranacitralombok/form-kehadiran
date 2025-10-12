@@ -5,53 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Form Absensi MBG</title>
   <style>
-    /* === 1. Reset dan Kontrol Scroll Global === */
+    /* Reset dan tampilan dasar */
     html, body {
-      margin: 0 !important;
-      padding: 0 !important;
+      margin: 0;
+      padding: 0;
       height: 100%;
       width: 100%;
-      overflow: hidden !important;
       background: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden; /* tidak ada scrollbar */
     }
 
-    /* === 2. Ruang Atas dan Bawah === */
-    body {
-      padding-top: 40px !important;
-      padding-bottom: 60px !important; /* tambahkan lebih banyak ruang di bawah */
+    /* Bungkus iframe agar tetap proporsional */
+    .iframe-wrapper {
+      width: 95%;
+      max-width: 820px;
+      height: 95vh; /* biar pas di layar tapi tetap ada ruang */
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-    /* === 3. Iframe Styling === */
     iframe {
-      position: absolute;
-      top: 40px; /* sesuai padding atas */
-      left: 0;
-      width: 100vw;
-      height: calc(100vh - 100px) !important; 
-      /* hitungannya: 40px atas + 60px bawah = 100px */
-      
-      border: none !important;
-      outline: none !important;
-      overflow: hidden !important;
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      overflow: hidden;
       scrollbar-width: none;
-      background: transparent;
     }
 
-    /* Hilangkan scrollbar di Webkit browser */
     iframe::-webkit-scrollbar {
-      display: none !important;
-      width: 0 !important;
-      height: 0 !important;
+      display: none;
+    }
+
+    /* Ruang bawah kecil */
+    body::after {
+      content: "";
+      display: block;
+      height: 30px;
     }
   </style>
 </head>
 <body>
-  <iframe
-    src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
-    title="Form Absensi MBG"
-    scrolling="no"
-    frameborder="0"
-    sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
-  </iframe>
+  <div class="iframe-wrapper">
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbwv6LUyTCWJc6MhdsWMigE3DpDEUfBjpPyjP3YqwUncoaTNpFfdDBKA7IDNUNEot_8h/exec"
+      title="Form Absensi MBG"
+      scrolling="no"
+      sandbox="allow-same-origin allow-scripts allow-forms allow-popups">
+    </iframe>
+  </div>
 </body>
 </html>
