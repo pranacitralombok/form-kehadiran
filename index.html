@@ -11,29 +11,30 @@
       padding: 0 !important;
       height: 100%;
       width: 100%;
-      overflow: hidden !important; /* Pertahankan ini agar tidak ada scrollbar utama */
+      overflow: hidden !important; 
       background: #f8fafc;
     }
 
-    /* 2. Tambahkan Jarak Pada Body */
+    /* 2. Tambahkan Jarak Vertikal (Padding) pada Body */
     body {
-      /* TAMBAHKAN JARAK DI SINI: Atas 40px, Kanan 0, Bawah 40px, Kiri 0 */
-      padding-top: 10px !important;
-      padding-bottom: 80px !important;
-      /* Tinggi efektif body sekarang adalah 100% - 80px (40 atas + 40 bawah) */
+      /* PENTING: Jarak 40px di atas dan 40px di bawah */
+      padding: 40px 0 !important; /* Atas dan Bawah 40px, Kiri dan Kanan 0 */
     }
 
     /* 3. Kontrol IFRAME */
     iframe {
-      position: absolute; 
-      top: 40px; /* **Sesuaikan posisi awal IFRAME dengan padding-top BODY** */
+      /* Ganti position:absolute menjadi position:fixed untuk kompatibilitas viewport yang lebih baik */
+      position: fixed; 
+      
+      /* Geser Iframe ke bawah sebesar padding-top body (40px) */
+      top: 40px; 
       left: 0;
       
-      /* **Sesuaikan Tinggi IFRAME** */
-      /* Hitungan: 100vh (tinggi penuh) - 40px (padding atas) - 40px (padding bawah) */
+      width: 100vw;
+      
+      /* **KUNCI:** Hitung tinggi Iframe: 100vh - 80px (40px atas + 40px bawah) */
       height: calc(100vh - 80px) !important; 
       
-      width: 100vw;
       border: 0 !important; 
       outline: none !important; 
       overflow: hidden !important; 
@@ -58,5 +59,3 @@
   </iframe>
 </body>
 </html>
-
-
